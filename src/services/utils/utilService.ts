@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BASE_URL } from "@/constants";
+import { startGlobalLoading, stopGlobalLoading } from "@/services/utils/loadingManager";
 import { HttpMethod, IStandardAPIResponse, IToken } from "@/vm";
 
 export function getToken() {
@@ -33,29 +34,32 @@ export const baseHttpClient = async <T>(
   apiUrl: string = BASE_URL,
   isPublic: boolean = false
 ): Promise<IStandardAPIResponse<T>> => {
+  startGlobalLoading();
   try {
     if (method === "GET" && bodyObj) {
       const params = new URLSearchParams(bodyObj).toString();
       endPoint += "?" + params;
       bodyObj = undefined;
     }
+
     const body = bodyObj === undefined ? undefined : JSON.stringify(bodyObj);
     let headers = undefined;
-    if (isPublic === false) {
+
+    if (!isPublic) {
       headers = {
         "Content-Type": "application/json; charset=utf-8",
         authorization: "Bearer " + getToken(),
       };
     }
+
     const url = endPoint.includes("http") ? endPoint : apiUrl + endPoint;
-    const res = await fetch(url, {
-      method,
-      body,
-      headers,
-    });
+    const res = await fetch(url, { method, body, headers });
+
     return await res.json();
   } catch (error) {
-    console.log(error, "Api Error");
+    console.error(error, "Api Error");
     throw error;
+  } finally {
+    stopGlobalLoading();
   }
 };
