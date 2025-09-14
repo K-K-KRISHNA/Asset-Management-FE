@@ -9,3 +9,15 @@ export interface IMenu extends Record<string, any> {
   language?: ILanguage;
   disabled?: boolean;
 }
+
+export interface IToken {
+  userId: string;
+}
+export interface IStandardAPIResponse<T = any> {
+  status: boolean;
+  message: string;
+  data: T;
+  count?: number;
+}
+
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
