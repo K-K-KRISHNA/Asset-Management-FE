@@ -1,42 +1,837 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* body {
+  font-family: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"' !important
+} */
+::-ms-reveal {
+	display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.loading-dialog > div > div {
+	background-color: transparent;
+	box-shadow: none;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+.loading {
+	color: #fff;
+	padding-top: 8px;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.custom-fieldset {
+	border: 1px solid rgba(0, 0, 0, 0.23);
+	padding: 16px;
+	border-radius: 8px;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.custom-fieldset > label {
+	margin-top: -28px;
+	background: #fff;
+	width: fit-content;
+	padding: 0px 6px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.custom-border {
+	border: 1px solid rgba(0, 0, 0, 0.23);
+	padding: 16px;
+	border-radius: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.drawer > div:nth-child(3) {
+	width: 35%;
+}
+
+.medium > div:nth-child(3) {
+	width: 50% !important;
+}
+
+.large > div:nth-child(3) {
+	width: 65% !important;
+}
+
+.x-large > div:nth-child(3) {
+	width: 87% !important;
+}
+
+.fullDrawer > div:nth-child(3) {
+	width: 100% !important;
+}
+
+.bordered-table table,
+.bordered-table th,
+.bordered-table td {
+	border: 1px solid #9f8b8b;
+	padding: 6px;
+}
+
+.selected-side-menu {
+	border-radius: 0.625rem !important;
+	border: 1px solid #fff !important;
+	box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+.tab-center .MuiTabs-flexContainer {
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+}
+
+@media screen and (max-width: 970px) {
+	.drawer > div:nth-child(3) {
+		width: 50%;
+	}
+
+	.medium > div:nth-child(3) {
+		width: 75% !important;
+	}
+
+	.large > div:nth-child(3) {
+		width: 100% !important;
+	}
+
+	.fullDrawer > div:nth-child(3) {
+		width: 100% !important;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.drawer > div:nth-child(3) {
+		width: 100%;
+	}
+
+	.medium > div:nth-child(3) {
+		width: 100% !important;
+	}
+
+	.large > div:nth-child(3) {
+		width: 100% !important;
+	}
+
+	.fullDrawer > div:nth-child(3) {
+		width: 100% !important;
+	}
+	.dashboard-products-container .react-multi-carousel-item {
+		width: 110px !important;
+		min-width: 110px !important;
+	}
+}
+
+.letter-spacing-1 {
+	letter-spacing: 0.0625rem !important;
+}
+
+.letter-spacing-2 {
+	letter-spacing: 0.09375rem !important;
+}
+
+.line-height-1 {
+	line-height: 1.5rem !important;
+}
+
+.line-height-2 {
+	line-height: 2.5rem !important;
+}
+
+.line-height-3 {
+	line-height: 1.875rem !important;
+}
+
+.all-small-caps {
+	font-variant: small-caps !important;
+	text-transform: uppercase !important;
+}
+
+.text-no-wrap {
+	text-wrap: nowrap !important;
+}
+
+.custom-text-input-base input {
+	padding: 16px 14px !important;
+}
+
+.custom-text-input-base fieldset legend {
+	max-width: 0 !important;
+}
+
+.custom-text-input-root label {
+	top: 6px !important;
+}
+
+.custom-text-input-root label.MuiInputLabel-shrink {
+	top: 8px !important;
+}
+
+.custom-select-input-base {
+	/* padding: 16px 14px !important; */
+	background-color: #fff !important;
+	border-radius: 8px !important;
+}
+
+.custom-select-input-root .MuiOutlinedInput-root {
+	border-radius: 8px !important;
+}
+
+.custom-select-input-root fieldset legend {
+	max-width: 0 !important;
+}
+
+.custom-select-input-root label.MuiInputLabel-shrink {
+	top: 8px !important;
+}
+
+::-webkit-scrollbar {
+	background-color: #f5f5f5;
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #c1c1c1;
+	background-image: -webkit-gradient(
+		linear,
+		0 0,
+		0 100%,
+		color-stop(0.5, rgba(255, 255, 255, 0.2)),
+		color-stop(0.5, transparent),
+		to(transparent)
+	);
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: #f5f5f5;
+}
+
+.plan-card {
+	background-color: #eee !important;
+}
+
+.plan-card:hover,
+.plan-card.selected-plan {
+	background-color: #064297 !important;
+	color: #fff !important;
+}
+
+.plan-card:hover .plan-card-products,
+.plan-card.selected-plan .plan-card-products {
+	color: #fff !important;
+}
+
+.plan-card:hover .check-icon,
+.plan-card.selected-plan .check-icon {
+	/* color: #fff !important; */
+	background-image: url('/icons/check-mark-white.svg') !important;
+}
+
+.plan-card:hover button.MuiButton-contained,
+.plan-card.selected-plan button.MuiButton-contained {
+	background-color: #fff;
+	color: #064297;
+}
+
+.plan-card:hover span.Mui-checked.MuiCheckbox-root,
+.plan-card.selected-plan span.Mui-checked.MuiCheckbox-root {
+	color: #fff;
+}
+
+.plan-card:hover button.MuiButton-outlined,
+.plan-card.selected-plan button.MuiButton-outlined {
+	border: 1px solid #fff;
+	color: #fff;
+}
+
+.plan-card .detail-box {
+	background-color: #5d738d !important;
+	color: #fff !important;
+}
+
+.plan-card:hover .detail-box,
+.plan-card.selected-plan .detail-box {
+	background-color: #fff !important;
+	color: #000 !important;
+}
+
+.optional-card.selected-card .optional-text {
+	color: #064297 !important;
+}
+
+/* .optional-card.selected-card:hover .optional-text{
+  color: #fff !important;
+} */
+.optional-card.selected-card.disabled .optional-text {
+	color: #064297 !important;
+}
+
+.optional-card.selected-card {
+	background-color: #064297 !important;
+	color: #fff !important;
+}
+
+.optional-card.selected-card .detail-box {
+	background-color: #5d738d !important;
+	color: #fff !important;
+}
+
+.optional-card:hover .detail-box {
+	background-color: #fff !important;
+	color: #000 !important;
+}
+
+.optional-card.disabled-card {
+	background-color: #eee !important;
+	color: #000 !important;
+}
+
+.optional-card.disabled-card .detail-box {
+	background-color: #eee !important;
+	color: #000 !important;
+}
+
+.optional-card.disabled-card:hover .detail-box {
+	background-color: #eee !important;
+	color: #000 !important;
+}
+
+.optional-card.disabled {
+	opacity: 0.5 !important;
+}
+
+.optional-card:hover.disabled {
+	background-color: #eee !important;
+	opacity: 0.5 !important;
+}
+
+.optional-card.selected {
+	background-color: #e97f34 !important;
+	color: #fff !important;
+}
+
+.optional-card.selected button {
+	color: #fff !important;
+}
+
+.optional-card.selected .optional-text {
+	color: #fff !important;
+}
+
+.optional-card.selected .plan-card-products {
+	color: #fff !important;
+}
+
+.wrap-text {
+	text-wrap: nowrap !important;
+}
+
+.plan-btn {
+	height: 50px !important;
+	border-radius: 40px !important;
+	/* padding: 20px 40px !important; */
+	font-size: 18px !important;
+	font-weight: 400 !important;
+}
+
+.choose-plan-btn {
+	height: 60px !important;
+	border-radius: 10px !important;
+	font-size: 18px !important;
+	font-weight: 400 !important;
+	width: 100%;
+}
+
+.choose-package-button {
+	border-radius: 10px !important;
+}
+
+.choose-package-button.Mui-selected {
+	background-color: #e97f34 !important;
+}
+
+.sign-up-stepper .MuiStepConnector-root,
+.sign-up-stepper .MuiStepContent-root {
+	top: 28px !important;
+	padding: 0 64px !important;
+	/* margin-left: 28px !important; */
+}
+
+.sign-up-stepper .MuiStepConnector-line {
+	border-top-width: 2px !important;
+}
+
+.mr-2 {
+	margin-right: 8px !important;
+}
+
+.mr-4 {
+	margin-right: 16px !important;
+}
+
+.mr-8 {
+	margin-right: 24px !important;
+}
+
+.ml-2 {
+	margin-left: 8px !important;
+}
+
+.ml-4 {
+	margin-left: 16px !important;
+}
+
+.ml-8 {
+	margin-left: 24px !important;
+}
+
+.ml-23 {
+	margin-left: 92px !important;
+}
+
+.ml-12 {
+	margin-left: 48px !important;
+}
+
+.mr-12 {
+	margin-right: 48px !important;
+}
+
+.ml-14 {
+	margin-left: 56px !important;
+}
+
+.mr-14 {
+	margin-right: 56px !important;
+}
+
+.mb-1 {
+	margin-bottom: 4px !important;
+}
+
+.mb-2 {
+	margin-bottom: 8px !important;
+}
+
+.mb-4 {
+	margin-bottom: 16px !important;
+}
+
+.mb-8 {
+	margin-bottom: 24px !important;
+}
+
+.mb-7 {
+	margin-bottom: 28px !important;
+}
+
+.mb-34px {
+	margin-bottom: 34px !important;
+}
+
+.mb-10 {
+	margin-bottom: 40px !important;
+}
+
+.mt-1 {
+	margin-top: 4px !important;
+}
+
+.mt-2 {
+	margin-top: 8px !important;
+}
+
+.mt-4 {
+	margin-top: 16px !important;
+}
+
+.mt-16 {
+	margin-top: 32px !important;
+}
+
+.mt-29 {
+	margin-top: 98px !important;
+}
+
+.mt-30 {
+	margin-top: 91px !important;
+}
+
+.mt-10 {
+	margin-top: 40px !important;
+}
+
+.mt-8 {
+	margin-top: 32px !important;
+}
+
+.mt--8 {
+	margin-top: -24px !important;
+}
+
+.date-picker .MuiOutlinedInput-root {
+	border-radius: 8px !important;
+}
+
+.custom-date-picker .MuiOutlinedInput-root {
+	flex-direction: row-reverse !important;
+	padding-right: 0 !important;
+}
+
+.custom-date-range .rdrMonthPicker select {
+	text-align: left !important;
+}
+
+.custom-date-range .rdrDateDisplayWrapper {
+	display: none !important;
+}
+
+.react-multi-carousel-track {
+	transform-style: flat !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+	-webkit-backface-visibility: unset !important;
+	backface-visibility: unset !important;
+	will-change: unset !important;
+}
+
+.react-multi-carousel-item {
+	transform-style: flat !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+	-webkit-backface-visibility: unset !important;
+	backface-visibility: unset !important;
+}
+
+.language-ar,
+.language-ar * {
+	text-align: right !important;
+}
+
+li.language-ar,
+li.language-ar * {
+	display: flex !important;
+	justify-content: flex-end !important;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.toast-bar-container > div:nth-child(1) {
+	flex: 1 !important;
+}
+
+.primary {
+	color: #064297 !important;
+}
+
+.grey-text {
+	color: grey;
+}
+
+.single-line {
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+}
+
+.green-background {
+	background-color: '#E97F34';
+	border-radius: 12;
+	padding: '10px';
+}
+
+.dotted-line {
+	border-bottom: 1px dotted #000;
+	margin-top: 8px;
+	margin-bottom: 9px;
+}
+
+.card-last-child-p-0:last-child {
+	padding-bottom: 0px !important;
+}
+
+.react-multi-carousel-item {
+	max-width: 187px;
+	min-width: 187px;
+}
+
+@media (min-width: 1200px) {
+	.benefits-container {
+		width: calc(100% - 620px) !important;
+		min-width: calc(100% - 620px) !important;
+		max-width: calc(100% - 620px) !important;
+	}
+
+	.carousal-container {
+		width: 570px !important;
+		min-width: 570px !important;
+		max-width: 570px !important;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+	.benefits-container {
+		width: calc(100% - 600px) !important;
+		min-width: calc(100% - 600px) !important;
+		max-width: calc(100% - 600px) !important;
+	}
+
+	.carousal-container {
+		width: 570px !important;
+		min-width: 570px !important;
+		max-width: 570px !important;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.benefits-container {
+		width: calc(100% - 390px) !important;
+		min-width: calc(100% - 390px) !important;
+		max-width: calc(100% - 390px) !important;
+	}
+
+	.carousal-container {
+		width: 380px !important;
+		min-width: 380px !important;
+		max-width: 380px !important;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.benefits-container {
+		width: calc(100% - 200px) !important;
+		min-width: calc(100% - 200px) !important;
+		max-width: calc(100% - 200px) !important;
+	}
+
+	.carousal-container {
+		width: 198px !important;
+		min-width: 198px !important;
+		max-width: 198px !important;
+	}
+}
+
+.react-select {
+	font-size: 1rem !important;
+}
+
+.react-select > div:nth-child(3) {
+	z-index: 99;
+	min-height: 56px;
+	border-radius: 8px;
+}
+
+.react-select > div:nth-child(2) {
+	z-index: 99;
+}
+
+.react-select > div:nth-child(4) {
+	z-index: 999;
+}
+
+.react-select-field-error > div:nth-child(3),
+.react-date-error > div:nth-child(3) {
+	border: 1px solid #e70404 !important;
+	box-shadow: none !important;
+}
+
+.react-select-overflow-top > div:nth-child(3) {
+	bottom: 100% !important;
+	top: auto !important;
+}
+
+.text-disabled {
+	color: #6d6d6d !important;
+}
+
+.fw-700 {
+	font-weight: 700 !important;
+}
+
+.fw-400 {
+	font-weight: 400 !important;
+}
+
+.bar-chart {
+	height: 320px !important;
+	width: 100% !important;
+}
+
+.input-placeholder::placeholder {
+	color: '#000';
+	font-weight: 400;
+	opacity: 0.4;
+}
+
+.max-width-198 {
+	max-width: 198px !important;
+}
+
+.max-width-256 {
+	max-width: 260px !important;
+}
+
+.less-padding-table th,
+.less-padding-table td {
+	padding: 6px 12px !important;
+}
+
+.list-table td {
+	padding-left: 0px !important;
+	padding-top: 12px !important;
+	padding-bottom: 12px !important;
+}
+
+.list-table-small th,
+.list-table-small td {
+	padding: 6px 0px !important;
+}
+
+.flex-grow-1 {
+	flex-grow: 1 !important;
+}
+
+.compare-plans-container .react-multi-carousel-item {
+	min-width: none;
+	max-width: none;
+}
+
+.dashboard-products-container .react-multi-carousel-item {
+	min-width: none;
+	max-width: 160px;
+}
+
+.dashboard-products-container .react-multi-carousel-track {
+	gap: 16px;
+	width: 100%;
+}
+
+.sticky-column {
+	position: sticky;
+	left: 0;
+	background-color: #f4f4f4;
+	z-index: 99;
+}
+.sticky-column-2 {
+	position: sticky;
+	left: 0;
+	background-color: #efefef;
+	z-index: 99;
+}
+
+.sticky-column-white {
+	position: sticky;
+	left: 0;
+	background-color: #ffff;
+	z-index: 99;
+}
+.sticky-column-white-no-color {
+	position: sticky;
+	left: 0;
+	z-index: 99;
+}
+.custom-input-text-area .MuiOutlinedInput-root {
+	height: 100%;
+	align-items: flex-start;
+	padding: 12.5px 14px !important;
+}
+
+.custom-input-text-area textarea {
+	padding: 0px !important;
+}
+
+.no-border-table th,
+.no-border-table td {
+	border-bottom: none !important;
+}
+
+.MuiPickersDay-root {
+	font-size: 12px !important;
+}
+
+.dashboard-campaigns-container .react-multi-carousel-item {
+	min-width: inherit !important;
+	max-width: inherit !important;
+}
+
+.custom-li {
+	list-style: none;
+}
+.custom-li:before {
+	content: '· ';
+	font-size: 30px;
+	vertical-align: middle;
+	line-height: 16px;
+	margin-left: -32px;
+	padding-right: 12px;
+}
+.custom-radio-button-label {
+	border: 1px solid #d6d6d6;
+	border-radius: 8px;
+	padding-right: 16px;
+	padding-left: 8px;
+	margin-top: 12px;
+	margin-left: 0px !important;
+	min-width: 120px;
+}
+.custom-radio-button-label-selected {
+	border: 1px solid #064297;
+	border-radius: 8px;
+	padding-right: 16px;
+	padding-left: 8px;
+	margin-top: 12px;
+	margin-left: 0px !important;
+	min-width: 120px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	appearance: textfield;
+	-moz-appearance: textfield;
+}
+.position-relative-class {
+	position: relative;
+	left: -150px;
+}
+.MuiFormHelperText-root {
+	font-size: 12px !important;
+}
+
+.mui-174rxte-MuiFormHelperText-root {
+	font-size: 12px !important;
+}
+.mui-1u5arxg-MuiTypography-root {
+	font-size: 12px !important;
+}
+.mui-1v98b5d-MuiTypography-root {
+	font-size: 12px !important;
+}
+.custom-input-radio:has(RadioGroup.Mui-error) .custom-radio-button-label {
+	/* Apply error styles here (e.g., red border) */
+	border: 1px solid red !important; /* !important might be needed to override MUI */
+}
+.custom-input-radio:has(RadioGroup.Mui-error) .custom-radio-button-label-selected {
+	/* Apply error styles for the selected radio button */
+	border: 1px solid red !important; /* !important might be needed to override MUI */
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	appearance: textfield;
+	-moz-appearance: textfield;
+}
+.custom-input-radio.error-state .custom-radio-button-label {
+	/* Apply error styles here */
+	border: 1px solid #d32f2f;
+}
+
+.custom-input-radio.error-state .custom-radio-button-label-selected {
+	/* Apply error styles for the selected radio button */
+	border: 1px solid #d32f2f;
 }
