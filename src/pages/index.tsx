@@ -2,6 +2,8 @@ import styles from "@/styles/Home.module.css";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
+import { useEffect } from "react";
+import { baseHttpClient } from "../services/utilService";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +16,14 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await baseHttpClient("https://jsonplaceholder.typicode.com/todos/1", "GET");
+      console.log(data, "data");
+      return data;
+    };
+    fetchData();
+  });
   return (
     <>
       <Head>
