@@ -3,10 +3,14 @@ import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { EyeClosedIcon, EyeIcon, KeyIcon } from "@phosphor-icons/react";
 import { Formik } from "formik";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { ToastContext } from "../../providers/SnackBar";
 import { baseHttpClient } from "../../services/utils/utilService";
+import { AppDispatch } from "../../store";
+import { setUser } from "../../store/slices/authSlice";
 import { COLORS } from "../../styles/colors";
 import { LoginResponse } from "../../vm";
 import AppButton from "../common/AppButton";
@@ -28,10 +32,10 @@ const LoginSchema = Yup.object().shape({
   pwdType: Yup.string().oneOf(["password", "text"]),
 });
 const LoginComponent = () => {
-  const [userData, setUserData] = useState<LoginResponse>();
   const { showToast } = useContext(ToastContext);
   const isBelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
-
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
   return (
     <Grid container boxSizing={"border-box"}>
       <Grid px={{ md: 12 }} size={{ xs: 12, md: 6 }}>
@@ -64,7 +68,9 @@ const LoginComponent = () => {
                   if (response.status) {
                     console.log(response);
                     showToast("Login Success", "success");
-                    setUserData(response.data);
+                    const loginRes = response.data;
+                    dispatch(setUser(loginRes.user));
+                    router.replace("/dashboard");
                   } else {
                     showToast(response.message, "error");
                   }
