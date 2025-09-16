@@ -89,6 +89,7 @@ function AppButton({
   autoFocus,
   ref,
   sx,
+  textColor,
   ...rest
 }: AppButtonProps) {
   const theme = useTheme();
@@ -110,7 +111,7 @@ function AppButton({
         borderRadius: "8px",
         // paddingX: "40px",
         textTransform: "capitalize",
-        // color: textColor || "",
+        color: textColor || "inherit",
         borderColor:
           variant === "outlined" && color !== "secondary" ? theme.palette.primary.main : "",
         boxShadow: 0,
