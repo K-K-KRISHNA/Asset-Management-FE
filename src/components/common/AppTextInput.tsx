@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { COLORS } from "@/styles/colors";
 import { FormControl, InputBaseComponentProps, TextField } from "@mui/material";
@@ -122,7 +123,6 @@ function AppTextInput({
   value,
   rows,
   placeholder,
-  className,
   label,
   error,
   icon,
@@ -135,9 +135,7 @@ function AppTextInput({
   shrink,
   autoFocus,
   margin,
-  required = false,
   id,
-  labelVariant,
   maxlength,
   formClassName,
   sx,
@@ -218,35 +216,6 @@ function AppTextInput({
             },
         }}
         {...rest}
-        InputProps={{
-          startAdornment: icon ? (
-            <InputAdornment position="start" sx={{ color: "#e60000" }}>
-              {icon}
-            </InputAdornment>
-          ) : (
-            ""
-          ),
-          endAdornment: error ? (
-            <InputAdornment position="end" sx={{ color: "#e60000" }}>
-              {error ? (
-                <>
-                  {endIcon || ""} <WarningCircleIcon weight="fill" size={24} />
-                </>
-              ) : (
-                " "
-              )}
-            </InputAdornment>
-          ) : endIcon ? (
-            <InputAdornment position="end">{endIcon || ""}</InputAdornment>
-          ) : (
-            ""
-          ),
-          sx: {
-            borderRadius: "8px",
-            background: disabled && !showAsNotDisabled ? "#f4f4f4" : "#fff",
-            borderColor: disabled ? "#e6e6e6" : "initial",
-          },
-        }}
         slotProps={{
           inputLabel: {
             shrink: shrink || undefined,
@@ -261,6 +230,24 @@ function AppTextInput({
               },
               className: "input-placeholder",
               ...inputProps,
+            },
+            startAdornment: icon ? <InputAdornment position="start">{icon}</InputAdornment> : "",
+            endAdornment: error ? (
+              <InputAdornment position="end">
+                {error ? (
+                  <>
+                    {endIcon || null}{" "}
+                    <WarningCircleIcon weight="fill" color={COLORS.error} size={24} />
+                  </>
+                ) : null}
+              </InputAdornment>
+            ) : endIcon ? (
+              <InputAdornment position="end">{endIcon || ""}</InputAdornment>
+            ) : null,
+            sx: {
+              borderRadius: "8px",
+              background: disabled && !showAsNotDisabled ? "#f4f4f4" : "#fff",
+              borderColor: disabled ? "#e6e6e6" : "initial",
             },
           },
         }}

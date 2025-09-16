@@ -1,6 +1,10 @@
 /* body {
   font-family: 'system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"' !important
 } */
+ body{
+	padding: 0;
+	margin: 0;
+ }
 ::-ms-reveal {
 	display: none;
 }

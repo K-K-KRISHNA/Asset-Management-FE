@@ -31,7 +31,8 @@
     "react-number-format": "^5.4.4",
     "react-select": "^5.10.2",
     "stylis": "^4.3.6",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
