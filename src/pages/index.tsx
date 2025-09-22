@@ -1,20 +1,11 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { Suspense, useEffect } from "react";
-import { baseHttpClient } from "../services/utils/utilService";
+import { Suspense } from "react";
 const AppLoading = dynamic(() => import("@/components/common/AppLoading"));
 const LoginComponent = dynamic(() => import("@/components/login/LoginComponent"), { ssr: false });
 const Layout = dynamic(() => import("@/components/common/Layout"), { ssr: false });
 
 export default function Home() {
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await baseHttpClient("https://jsonplaceholder.typicode.com/todos/1", "GET");
-      console.log(data, "data");
-      return data;
-    };
-    fetchData();
-  });
   return (
     <>
       <Head>

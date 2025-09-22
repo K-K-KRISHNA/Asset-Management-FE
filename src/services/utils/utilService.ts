@@ -3,13 +3,41 @@ import { BASE_URL } from "@/constants";
 import { startGlobalLoading, stopGlobalLoading } from "@/services/utils/loadingManager";
 import { HttpMethod, IStandardAPIResponse, IToken } from "@/vm";
 
+const SECRET_KEY = "some-secret-key";
+
+export const encryptToken = (token: string): string => {
+  return btoa(
+    token
+      .split("")
+      .map((char, i) =>
+        String.fromCharCode(char.charCodeAt(0) ^ SECRET_KEY.charCodeAt(i % SECRET_KEY.length))
+      )
+      .join("")
+  );
+};
+
+export const decryptToken = (encrypted: string): string => {
+  const decoded = atob(encrypted);
+  return decoded
+    .split("")
+    .map((char, i) =>
+      String.fromCharCode(char.charCodeAt(0) ^ SECRET_KEY.charCodeAt(i % SECRET_KEY.length))
+    )
+    .join("");
+};
+
 export function getToken() {
   const res = localStorage.getItem("token");
   if (res === null || res === undefined) {
     return "";
   }
-  return res;
+  return decryptToken(res);
 }
+
+export const setToken = (token: string) => {
+  const encryptedToken = encryptToken(token);
+  localStorage.setItem("token", encryptedToken);
+};
 
 export const parseJwt = (tokenParsed?: string): IToken | undefined => {
   let token;
