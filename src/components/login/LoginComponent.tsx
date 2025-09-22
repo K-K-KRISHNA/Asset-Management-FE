@@ -1,4 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import AppButton from "@/components/common/AppButton";
+import AppCheckBoxInput from "@/components/common/AppCheckBoxInput";
+import AppTextInput from "@/components/common/AppTextInput";
+import { ToastContext } from "@/providers/SnackBar";
+import { baseHttpClient, setToken } from "@/services/utils/utilService";
+import { AppDispatch } from "@/store";
+import { setUser } from "@/store/slices/authSlice";
+import { COLORS } from "@/styles/colors";
+import { LoginResponse } from "@/vm";
 import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { EyeClosedIcon, EyeIcon, KeyIcon } from "@phosphor-icons/react";
 import { Formik } from "formik";
@@ -7,15 +16,6 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { ToastContext } from "../../providers/SnackBar";
-import { baseHttpClient } from "../../services/utils/utilService";
-import { AppDispatch } from "../../store";
-import { setUser } from "../../store/slices/authSlice";
-import { COLORS } from "../../styles/colors";
-import { LoginResponse } from "../../vm";
-import AppButton from "../common/AppButton";
-import AppCheckBoxInput from "../common/AppCheckBoxInput";
-import AppTextInput from "../common/AppTextInput";
 import { loginImage } from "./assets/assets";
 import mobileBg from "./assets/mobile_bg.png";
 
@@ -69,8 +69,10 @@ const LoginComponent = () => {
                     console.log(response);
                     showToast("Login Success", "success");
                     const loginRes = response.data;
+                    const token = loginRes.token;
+                    setToken(token);
                     dispatch(setUser(loginRes.user));
-                    router.replace("/dashboard");
+                    router.push("/dashboard");
                   } else {
                     showToast(response.message, "error");
                   }
