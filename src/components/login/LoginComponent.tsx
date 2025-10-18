@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { loginImage, mobileBg } from "@/assets/assets";
 import AppButton from "@/components/common/AppButton";
 import AppCheckBoxInput from "@/components/common/AppCheckBoxInput";
 import AppTextInput from "@/components/common/AppTextInput";
@@ -16,8 +17,6 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { loginImage } from "./assets/assets";
-import mobileBg from "./assets/mobile_bg.png";
 
 interface Values {
   empId: string;
