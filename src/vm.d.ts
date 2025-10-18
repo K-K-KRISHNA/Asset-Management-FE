@@ -72,3 +72,8 @@ export interface IStandardAPIResponse<T = any> {
 }
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export interface ForgotPasswordInputs {
+  email: string;
+  otp: string;
+  newPassword: string;
+}

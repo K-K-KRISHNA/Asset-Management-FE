@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { getToken } from "../../services/utils/utilService";
 import AppLoading from "./AppLoading";
 
-const unAuthorizedPaths = ["/"]; // Add paths that don't require auth
+const unAuthorizedPaths = ["/","/forgot-password"]; // Add paths that don't require auth
 
 interface LayoutContentProps {
   children: ReactNode;
