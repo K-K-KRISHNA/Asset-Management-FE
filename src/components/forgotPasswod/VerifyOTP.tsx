@@ -5,15 +5,20 @@ import { FORGOT_PASSWORD_SCREENS } from "@/enums/vm.enums";
 import { ToastContext } from "@/providers/SnackBar";
 import { baseHttpClient } from "@/services/utils/utilService";
 import { COLORS } from "@/styles/colors";
+import { ForgotPasswordInputs } from "@/vm";
 import { Grid, Stack, TextField, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
 
 interface IProps {
-  movetoNextScreen: (inputs: { otp?: string }, nextScreen: FORGOT_PASSWORD_SCREENS) => void;
+  movetoNextScreen: (
+    inputs: Partial<ForgotPasswordInputs>,
+    nextScreen: FORGOT_PASSWORD_SCREENS
+  ) => void;
+  formInputs: ForgotPasswordInputs;
 }
 
-const VerifyOTP: React.FC<IProps> = ({ movetoNextScreen }) => {
+const VerifyOTP: React.FC<IProps> = ({ movetoNextScreen, formInputs }) => {
   const { showToast } = useContext(ToastContext);
   const isBelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
@@ -63,10 +68,14 @@ const VerifyOTP: React.FC<IProps> = ({ movetoNextScreen }) => {
     }
 
     try {
-      const response = await baseHttpClient<any>("verify-otp", "POST", { otp: enteredOtp });
+      const response = await baseHttpClient<{ resetToken: string }>("verifyOtp", "POST", {
+        email: formInputs.email,
+        otp: enteredOtp,
+      });
       if (response?.status) {
+        const { resetToken } = response.data;
         showToast("OTP Verified Successfully!", "success");
-        movetoNextScreen({ otp: enteredOtp }, FORGOT_PASSWORD_SCREENS.SET_NEW_PASSWORD);
+        movetoNextScreen({ resetToken }, FORGOT_PASSWORD_SCREENS.SET_NEW_PASSWORD);
       } else {
         showToast(response?.message || "Invalid OTP", "error");
       }
@@ -79,7 +88,7 @@ const VerifyOTP: React.FC<IProps> = ({ movetoNextScreen }) => {
     try {
       setIsResendAvailable(false);
       setTimer(30);
-      const response = await baseHttpClient<any>("resend-otp", "POST", {});
+      const response = await baseHttpClient<any>("sendOtp", "POST", { email: formInputs.email });
       if (response?.status) {
         showToast(response.message || "OTP resent successfully", "success");
       } else {

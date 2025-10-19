@@ -1,9 +1,9 @@
 import { FORGOT_PASSWORD_SCREENS } from "@/enums/vm.enums";
+import { COLORS } from "@/styles/colors";
+import { ForgotPasswordInputs } from "@/vm";
 import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { ArrowLeftIcon, CheckCircleIcon } from "@phosphor-icons/react";
 import { useCallback, useState } from "react";
-import { COLORS } from "../../styles/colors";
-import { ForgotPasswordInputs } from "../../vm";
 import CustomDialog from "../common/CustomDialog";
 import CreateNewPassword from "./CreateNewPassword";
 import SendOTP from "./SendOTP";
@@ -12,11 +12,11 @@ import VerifyOTP from "./VerifyOTP";
 const ForgotPasswordFlowContainer = () => {
   const [formInputs, setFormInputs] = useState<ForgotPasswordInputs>({
     email: "",
-    otp: "",
     newPassword: "",
+    resetToken: "",
   });
   const [currentScreen, setCurrentScreen] = useState<FORGOT_PASSWORD_SCREENS>(
-    FORGOT_PASSWORD_SCREENS.SET_NEW_PASSWORD
+    FORGOT_PASSWORD_SCREENS.SEND_OTP
   );
   const movetoNextScreen = useCallback(
     (inputs: Partial<ForgotPasswordInputs>, nextScreen: FORGOT_PASSWORD_SCREENS) => {
@@ -28,7 +28,12 @@ const ForgotPasswordFlowContainer = () => {
   const isBelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
   return (
     <>
-      <CustomDialog title={""} variant={isBelowMd ? undefined : "md"} onClose={() => {}}>
+      <CustomDialog
+        handleOpen={currentScreen === FORGOT_PASSWORD_SCREENS.SUCCESS_SCREEN}
+        title={""}
+        variant={isBelowMd ? undefined : "md"}
+        onClose={() => {}}
+      >
         <Stack
           justifyContent={"center"}
           alignItems={"center"}
@@ -66,9 +71,12 @@ const ForgotPasswordFlowContainer = () => {
         if (currentScreen === FORGOT_PASSWORD_SCREENS.SEND_OTP)
           return <SendOTP movetoNextScreen={movetoNextScreen} />;
         if (currentScreen === FORGOT_PASSWORD_SCREENS.VERIFY_OTP)
-          return <VerifyOTP movetoNextScreen={movetoNextScreen} />;
-        if (currentScreen === FORGOT_PASSWORD_SCREENS.SET_NEW_PASSWORD)
-          return <CreateNewPassword movetoNextScreen={movetoNextScreen} />;
+          return <VerifyOTP formInputs={formInputs} movetoNextScreen={movetoNextScreen} />;
+        if (
+          currentScreen === FORGOT_PASSWORD_SCREENS.SET_NEW_PASSWORD ||
+          currentScreen === FORGOT_PASSWORD_SCREENS.SUCCESS_SCREEN
+        )
+          return <CreateNewPassword formInputs={formInputs} movetoNextScreen={movetoNextScreen} />;
       })()}
     </>
   );

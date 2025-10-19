@@ -24,6 +24,7 @@ interface IProps {
     inputs: Partial<ForgotPasswordInputs>,
     nextScreen: FORGOT_PASSWORD_SCREENS
   ) => void;
+  formInputs: ForgotPasswordInputs;
 }
 
 // Validation schema
@@ -36,7 +37,7 @@ const CreateNewPasswordSchema = Yup.object().shape({
     .required("Confirm password is required"),
 });
 
-const CreateNewPassword: React.FC<IProps> = ({ movetoNextScreen }) => {
+const CreateNewPassword: React.FC<IProps> = ({ movetoNextScreen, formInputs }) => {
   const { showToast } = useContext(ToastContext);
   const isBelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
@@ -69,13 +70,15 @@ const CreateNewPassword: React.FC<IProps> = ({ movetoNextScreen }) => {
               validationSchema={CreateNewPasswordSchema}
               onSubmit={async ({ newPassword }) => {
                 try {
-                  const response = await baseHttpClient<any>("reset-password", "POST", {
+                  const { resetToken } = formInputs;
+                  const response = await baseHttpClient<any>("resetPassword", "POST", {
                     newPassword,
+                    resetToken,
                   });
 
                   if (response?.status) {
                     showToast(response.message || "Password reset successfully", "success");
-                    // movetoNextScreen({}, FORGOT_PASSWORD_SCREENS.SUCCESS);
+                    movetoNextScreen({}, FORGOT_PASSWORD_SCREENS.SUCCESS_SCREEN);
                   } else {
                     showToast(response?.message || "Unable to reset password", "error");
                   }
