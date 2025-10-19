@@ -59,11 +59,12 @@ const SendOTP: React.FC<IProps> = ({ movetoNextScreen }) => {
               validationSchema={ForgotPasswordSchema}
               onSubmit={async ({ email }) => {
                 try {
-                  const response = await baseHttpClient<any>("forgot-password", "POST", {
+                  const response = await baseHttpClient<any>("sendOtp", "POST", {
                     email,
                   });
                   if (response?.status) {
                     showToast(response.message || "Reset link sent", "success");
+                    movetoNextScreen({ email }, FORGOT_PASSWORD_SCREENS.VERIFY_OTP);
                   } else {
                     showToast(response?.message || "Unable to send reset link", "error");
                   }
