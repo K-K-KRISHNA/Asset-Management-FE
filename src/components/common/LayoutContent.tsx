@@ -48,10 +48,12 @@ const LayoutContent = ({ children }: LayoutContentProps) => {
       <Stack
         bgcolor={`${COLORS.primary}20`}
         direction={isBlelowMd ? "column" : "row"}
-        height={"100vh"}
+        minHeight={"100vh"}
       >
         {!unAuthorizedPaths.includes(router.pathname) && <Sidebar />}
-        <Box width={"100%"}>{children}</Box>
+        <Box width={"100%"} p={2}>
+          {children}
+        </Box>
       </Stack>
     </>
   );

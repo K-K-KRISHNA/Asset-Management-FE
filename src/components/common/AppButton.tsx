@@ -2,6 +2,7 @@
 
 import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { COLORS } from "../../styles/colors";
 
 interface AppButtonProps {
   btnText: any;
@@ -111,7 +112,7 @@ function AppButton({
         borderRadius: "8px",
         // paddingX: "40px",
         textTransform: "capitalize",
-        color: textColor || "inherit",
+        color: textColor || variant === "contained" ? COLORS.background : "inherit",
         borderColor:
           variant === "outlined" && color !== "secondary" ? theme.palette.primary.main : "",
         boxShadow: 0,

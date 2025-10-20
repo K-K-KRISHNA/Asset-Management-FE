@@ -19,6 +19,12 @@ export const THEME = createTheme({
     text: {
       disabled: COLORS.text_dark,
     },
+    success: {
+      main: COLORS.success,
+    },
+    error: {
+      main: COLORS.error,
+    },
   },
   components: {
     MuiTableContainer: {
@@ -38,6 +44,17 @@ export const THEME = createTheme({
     MuiTable: {
       defaultProps: {
         stickyHeader: true,
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: "5px",
+          "&.Mui-selected": {
+            backgroundColor: COLORS.primary,
+            color: COLORS.background,
+          },
+        },
       },
     },
   },

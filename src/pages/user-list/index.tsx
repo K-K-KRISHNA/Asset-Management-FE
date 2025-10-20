@@ -1,8 +1,8 @@
-import { Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 
 const Layout = dynamic(() => import("@/components/common/Layout"), { ssr: false });
+const Users = dynamic(() => import("@/components/users/Users"), { ssr: false });
 
 const Dashboard = () => {
   return (
@@ -19,11 +19,7 @@ const Dashboard = () => {
       </Head>
 
       <Layout>
-        <Stack alignItems="center" justifyContent="center" sx={{ minHeight: "80vh" }}>
-          <Typography variant="h4" component="h1">
-            Users List
-          </Typography>
-        </Stack>
+        <Users />
       </Layout>
     </>
   );
