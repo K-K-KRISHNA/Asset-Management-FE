@@ -65,4 +65,6 @@ export const COLORS = {
   text_yellow_dark: "#966506",
   error_light: "#FDECEC",
   warning_light: "#FFF9E6",
+  sidebar_bg_1: "#3246D3",
+  sidebar_bg_2: "#72B2E4",
 };

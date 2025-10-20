@@ -1,10 +1,12 @@
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline, Stack, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 import { getToken } from "../../services/utils/utilService";
+import { COLORS } from "../../styles/colors";
 import AppLoading from "./AppLoading";
+import Sidebar from "./Sidebar";
 
-const unAuthorizedPaths = ["/","/forgot-password"]; // Add paths that don't require auth
+const unAuthorizedPaths = ["/", "/forgot-password"]; // Add paths that don't require auth
 
 interface LayoutContentProps {
   children: ReactNode;
@@ -37,12 +39,20 @@ const LayoutContent = ({ children }: LayoutContentProps) => {
   }, [router.pathname]);
 
   // Show nothing or a loader while checking auth
+  const isBlelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
   if (isCheckingAuth) return <AppLoading />;
 
   return (
     <>
       <CssBaseline />
-      {children}
+      <Stack
+        bgcolor={`${COLORS.primary}20`}
+        direction={isBlelowMd ? "column" : "row"}
+        height={"100vh"}
+      >
+        {!unAuthorizedPaths.includes(router.pathname) && <Sidebar />}
+        <Box width={"100%"}>{children}</Box>
+      </Stack>
     </>
   );
 };
