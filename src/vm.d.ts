@@ -77,3 +77,11 @@ export interface ForgotPasswordInputs {
   newPassword: string;
   resetToken: string;
 }
+type UserStatus = "active" | "inactive";
+interface EachUserForUserList {
+  id: number;
+  photo: string;
+  desigration: string;
+  status: UserStatus;
+  userName: string;
+}

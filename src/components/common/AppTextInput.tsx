@@ -149,9 +149,7 @@ function AppTextInput({
   return (
     <FormControl
       sx={{
-        "& .MuiInputLabel-shrink": {
-          background: disabled ? "#f4f4f4" : "#fff",
-        },
+        "& .MuiInputLabel-shrink": {},
       }}
       fullWidth
       margin={margin || "normal"}
