@@ -8,10 +8,10 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>Dashboard | Asset Management</title>
+        <title>Bulk Upload | Asset Management</title>
         <meta
           name="description"
-          content="Dashboard page of Asset Management showing key metrics and analytics"
+          content="Bulk Upload page of Asset Management showing key metrics and analytics"
         />
         {/* Replace with your own icon in /public */}
         <link rel="icon" href="/favicon.ico" />
@@ -21,7 +21,7 @@ const Dashboard = () => {
       <Layout>
         <Stack alignItems="center" justifyContent="center" sx={{ minHeight: "80vh" }}>
           <Typography variant="h4" component="h1">
-            Dashboard
+            Bulk Upload
           </Typography>
         </Stack>
       </Layout>
