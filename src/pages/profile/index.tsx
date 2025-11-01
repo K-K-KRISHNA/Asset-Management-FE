@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import ProfileComponent from "../../components/profile/ProfileComponent";
 
 const Layout = dynamic(() => import("@/components/common/Layout"), { ssr: false });
 
@@ -24,6 +25,7 @@ const Dashboard = () => {
             Profile
           </Typography>
         </Stack>
+        <ProfileComponent />
       </Layout>
     </>
   );

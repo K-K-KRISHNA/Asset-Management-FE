@@ -1,22 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { loginImage, mobileBg } from "@/assets/assets";
 import AppButton from "@/components/common/AppButton";
 import AppCheckBoxInput from "@/components/common/AppCheckBoxInput";
 import AppTextInput from "@/components/common/AppTextInput";
 import { ToastContext } from "@/providers/SnackBar";
-import { baseHttpClient, setToken } from "@/services/utils/utilService";
-import { AppDispatch } from "@/store";
-import { setUser } from "@/store/slices/authSlice";
 import { COLORS } from "@/styles/colors";
-import { LoginResponse } from "@/vm";
 import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
 import { EyeClosedIcon, EyeIcon, KeyIcon } from "@phosphor-icons/react";
 import { Formik } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { loginSubmission } from "../../store/slices/authSlice";
+import { useAppDispatch } from "../../store/thunkHelpers";
 
 interface Values {
   empId: string;
@@ -33,7 +29,7 @@ const LoginSchema = Yup.object().shape({
 const LoginComponent = () => {
   const { showToast } = useContext(ToastContext);
   const isBelowMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   return (
     <Grid container boxSizing={"border-box"}>
@@ -58,26 +54,13 @@ const LoginComponent = () => {
               initialValues={{ empId: "", password: "", pwdType: "password", rememberMe: false }}
               validationSchema={LoginSchema}
               onSubmit={async ({ empId, password }) => {
-                console.log({ empId, password });
-                try {
-                  const response = await baseHttpClient<LoginResponse>("login", "POST", {
-                    empId: Number(empId),
-                    password,
-                  });
-                  if (response.status) {
-                    console.log(response);
-                    showToast("Login Success", "success");
-                    const loginRes = response.data;
-                    const token = loginRes.token;
-                    setToken(token);
-                    dispatch(setUser(loginRes.user));
-                    router.push("/dashboard");
-                  } else {
-                    showToast(response.message, "error");
-                  }
-                } catch (error: any) {
-                  showToast(error.message ?? "Something Went Wrong", "error");
-                }
+                const resultAction = await dispatch(
+                  loginSubmission({ empId: Number(empId), password })
+                );
+                if (loginSubmission.fulfilled.match(resultAction)) {
+                  showToast(resultAction.payload.message, "success");
+                  router.push("/dashboard");
+                } else showToast(resultAction.payload || "something went wrong", "error");
               }}
             >
               {({ values, handleSubmit, setFieldValue, getFieldProps, touched, errors }) => {

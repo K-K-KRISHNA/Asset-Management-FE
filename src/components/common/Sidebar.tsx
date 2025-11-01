@@ -1,3 +1,6 @@
+import { routes } from "@/constants";
+import { logout } from "@/store/slices/authSlice";
+import { COLORS } from "@/styles/colors";
 import {
   Avatar,
   Badge,
@@ -14,24 +17,17 @@ import {
 import { SystemStyleObject } from "@mui/system";
 import { BellIcon, CaretRightIcon, ListIcon, SignOutIcon, XIcon } from "@phosphor-icons/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { routes } from "../../constants";
-import { COLORS } from "../../styles/colors";
+import { useAppDispatch } from "../../store/thunkHelpers";
 import CustomDrawerComponent from "./CustomDrawer";
 
 const Sidebar = () => {
   const router = useRouter();
   const isBelowMd = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  // 🚀 Memoized to prevent re-renders
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    router.push("/");
-  };
-
+  const dispatch = useAppDispatch();
   // 🔹 Renders each route item
   const renderRoutes = useMemo(
     () => (
@@ -39,7 +35,12 @@ const Sidebar = () => {
         {routes.map(({ label, path, Icon }) => {
           const isActive = router.pathname.includes(path);
           return (
-            <ListItemButton key={label} href={path} sx={isActive ? styles.activeTab : undefined}>
+            <ListItemButton
+              LinkComponent={Link}
+              key={label}
+              href={path}
+              sx={isActive ? styles.activeTab : undefined}
+            >
               <ListItemIcon>
                 <Icon size={28} weight="bold" color={COLORS.background} />
               </ListItemIcon>
@@ -64,6 +65,7 @@ const Sidebar = () => {
       {!isBelowMd && (
         <ListItemButton
           sx={router.pathname === "/profile" ? styles.activeTab : undefined}
+          LinkComponent={Link}
           href="/profile"
         >
           <ListItemIcon>
@@ -86,7 +88,13 @@ const Sidebar = () => {
           </ListItemIcon>
         </ListItemButton>
       )}
-      <ListItemButton sx={{ mt: "auto" }} onClick={handleLogout}>
+      <ListItemButton
+        sx={{ mt: "auto" }}
+        onClick={() => {
+          dispatch(logout());
+          router.push("/");
+        }}
+      >
         <ListItemIcon>
           <SignOutIcon weight="bold" size={28} color={COLORS.background} />
         </ListItemIcon>
@@ -129,7 +137,7 @@ const Sidebar = () => {
               color="primary"
               fontSize={10}
               ml="auto"
-              component="a"
+              component={Link}
               href="/profile"
             >
               View Profile
@@ -162,7 +170,7 @@ const Sidebar = () => {
       p={2}
       alignItems="center"
     >
-      <ListIcon size={32} onClick={() => setIsDrawerOpen(true)} />
+      <ListIcon cursor={"pointer"} size={32} onClick={() => setIsDrawerOpen(true)} />
       <Image width={214} height={50} alt="logo" src="/AppLogo.png" />
       <Badge badgeContent={4} color="primary">
         <BellIcon size={28} />

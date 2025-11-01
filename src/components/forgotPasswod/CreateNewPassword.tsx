@@ -71,9 +71,13 @@ const CreateNewPassword: React.FC<IProps> = ({ movetoNextScreen, formInputs }) =
               onSubmit={async ({ newPassword }) => {
                 try {
                   const { resetToken } = formInputs;
-                  const response = await baseHttpClient<any>("resetPassword", "POST", {
-                    newPassword,
-                    resetToken,
+                  const response = await baseHttpClient<any>({
+                    endPoint: "resetPassword",
+                    method: "POST",
+                    bodyObj: {
+                      newPassword,
+                      resetToken,
+                    },
                   });
 
                   if (response?.status) {
