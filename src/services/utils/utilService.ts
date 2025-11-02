@@ -82,8 +82,15 @@ export const baseHttpClient = async <T>(
 
     const url = endPoint.includes("http") ? endPoint : apiUrl + endPoint;
     const res = await fetch(url, { method, body, headers });
-
-    return await res.json();
+    const responseBody = await res.json();
+    if (!res.ok) {
+      // Attach response body to error for more context
+      const error: any = new Error(responseBody?.message || "API Error");
+      error.status = res.status;
+      error.body = responseBody;
+      throw error;
+    }
+    return responseBody;
   } catch (error) {
     console.error(error, "Api Error");
     throw error;
